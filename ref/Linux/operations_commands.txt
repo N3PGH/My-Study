@@ -1,5 +1,9 @@
 linux command
 
+
+
+
+-----------------------------------------------
 [ec2-user]#Ls = list command
    -a = list including hidden files
    -l = detailed list with permission and time stamp
@@ -100,5 +104,12 @@ d:rwx:r-x: r--2 root group 6June01 12:30 dirx
 
 
 -----------------------------------------------------------
+sed -i -e 's/word1/word2/g' filename
+:%s/word1/word2/
+
+find / -name filename.extension
+------------------------------------
+
+scp -r -i file1 * hostname@ipaddress:FileLocation {secure copy protocol}
 
 
