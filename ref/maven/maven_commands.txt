@@ -1,0 +1,8 @@
+
+
+
+
+#mvn --version
+#mvn clean  {to clean maven it removes target folder}
+#mvn clean package  {to build package it will create .war file}
+--or #mvn package -DskipTests {it will skip test stage & create .war file}

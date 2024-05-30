@@ -1,0 +1,14 @@
+
+
+
+
+netstat -ab
+	-a
+	-o
+	-f
+	-e
+	-n
+netstat -tulpn | grep 8080  {to see tomcat listening}
+-----------------------------------------
+nslookup <hostname>
+-------------------------------------

@@ -1,0 +1,43 @@
+
+
+
+sudo apt install mysql-server
+sudo sytemctl status mysql.service
+#mysql_secure_installation
+	>>press>y
+  	medium>1
+  	remove user>y
+  	disallow root login remotely>y
+  	reload previlage table>y
+-------------------------------------------
+#mysql
+#CREATE USER 'username'@'localhost' IDENTIFIED BY 'user _password';
+#mysql -u username  -p
+#mysql> show databases;
+#mysql>GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost'; 
+#mysql>FLUSH PRIVILEGES;
+#mysql>create database test;
+----OR
+#mysql> ^DBye
+#mysql>GRANT ALL PRIVILEGES *.* TO 'username'@'localhost' WITH GRANT OPTION;
+#mysql>FLUSH PRIVILEGES;
+#mysql> ^Dbye
+
+
+#mysql -u username -p
+#mysql>show database;
+#mysql>create database test;
+#mysql>GRANT SUPER ON *.* TO 'usernmae'@'localhost';
+#mysql>FLUSH PRIVILEGES;
+#mysql> ^DBye;
+
+#systemctl restart mysql.service
+-------------------------------
+
+#mysql -u devops -p < ddl.sql  {store sql data to devops user}
+#show databases;
+#select * from users;
+---------------------------------
+
+
+

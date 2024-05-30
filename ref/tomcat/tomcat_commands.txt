@@ -1,0 +1,57 @@
+
+
+
+#wget https://d1cdn.apache.org/tomcat/tomcat-8/v8.5.98/bin/apache-tomcat-8.5.98.tar.gz
+#tar -xzvf apache-tomcat-8.5.98.tar.gz -C /opt/
+#mv /opt/apache-tomcat-8.5.98 /opt/tomcat
+$sudo chown -R 711 /opt/tomcat/bin
+$sudo chmod -r 777 /opt/tomcat/logs
+#cd tomcat
+
+
+#bash bin/startup.sh {test service running using bash}
+#netstat -tulpn | grep 8080   {to see tomcat listening}
+#bash bin/shutdown.sh
+
+--------------------------------------
+ 	{set this as a daemon process using below steps
+  	check java location used for tomcat.service file}
+
+$sudo update-java-alternatives -l
+$vi /etc/systemd/system/tomcat.service
+	[Unit]
+	Description=Tomcat servlet container
+	After=netwrk.target
+	
+	[Service]
+	Type=forking
+	user=tomcat
+	Group=tomcat
+	Environment="JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64"
+	Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headless=true"
+	Environment="CATALINA_BASE=/opt/tomcat"
+	Environment="CATALINA_HOME=/opt/tomcat"
+	Environment="CATALINA_PID=/opt/tomcat/temp/tomcat.pid"
+	Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+	ExecStart=/opt/tomcat/bin/startup.sh
+	ExecStop=/opt/tomcat/bin/shutdown.sh
+
+	[Install]
+	WantedBy=multi-user.target
+---------------------------------------------
+$sudo systemctl daemon-reload
+$sudo systemctl start tomcat
+$sudo systemctl status tomcat
+$sudo system enable tomcat
+		{if fails try}
+	#journalctl -u tomcat.service  {skip}
+	#chmod 0777  /opt/tomcat/bin/catalina.sh
+	#chmod 777 -R /opt/tomcat/
+	#chmod -R 777 /opt/tomcat/logs
+	$sudo update-java-alternatives -l
+	#systemctl restart tomcat.service
+	#journalctl -u tomcat.service -f
+#systemctl status tomcat.service 
+
+-------------------------
+

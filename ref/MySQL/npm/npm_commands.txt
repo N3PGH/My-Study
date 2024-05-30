@@ -1,0 +1,35 @@
+
+
+sudo apt update
+mkdir api
+cd api/
+pwd
+npm install pm2@latest -g
+node --version
+-------------------
+
+pm2 start server.js
+mongosh
+vi package.json
+node server.js
+pm2 restat server
+
+pm2 delete server
+
+ps -ef | grep node
+kill -9 8566
+-------------------
+
+rm -rf node_modules/
+npm cache clean
+
+
+--------------------
+
+pm2 logs
+pm2 ls
+npm i
+nvm ls
+npm install
+npm install express
+npm i express
