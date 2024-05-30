@@ -1,0 +1,100 @@
+Monitoring Tool:Slpunk, nagios, prometheus, ELK, Sensu, Librato.
+================================================================
+Nagios:
+port nagios clients uses: 5666, 5667, 5668
+
+
+
+
+-------------------------------------------------------------
+pre-requisite
+httpd [browser]
+php [dashboard]
+gcc & gd [coompiler to convert raw code into binares]
+make [file to build]
+perl [script]
+-----------------
+main configuration file:
+ usr/local/nagios/etc/nagios.cfg
+-----------------
+All monitoring things are called as services.
+-----------------
+Dashboard overview
+Host- down, unreachable, up, recovery, none
+Services- warning, unknown, critical, recovery, pending
+----------------
+
+Installation:
+#yum install httpd php
+#yum install gcc glibc glibc-common
+#yum install gd gd-devel
+
+[setup nagios user]
+#adduser -m nagios
+#passwd nagios
+#groupadd nagioscmd
+#usermod -a -G nagioscmd nagios
+#usermod -a -G nagioscmd apache
+
+[make new download directory in home]
+#mkdir ~/downloads 
+#cd ~/downloads
+
+[download nagios & nagios-plugins source code]
+#wget http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.0.8.tar.gz
+#wget https://nagios-plugins.org/download/nagios-plugins-2.4.8.tar.gz
+
+[extract files]
+#tar -zxvf nagios-4.0.8.tar.gz
+#cd nagios-4.0.8
+
+[run the configuration script with name of group which you have created.]
+#./configure --with-command-group=nagioscmd
+
+[compile nagios source code]
+#make all
+-----
+[/usr/bin/install -c -m 775 -o nagios -g nagcmd -d /usr/local/nagios/var/rw]
+[ chmod g+s /usr/local/nagios/var/rw]
+------
+[install binaries, init script sample config files & set permission on the external commmand directly.]
+#make install
+#make install-init
+#make install-config
+#make install-commandmode
+
+[to customise configuration]
+vim /usr/local/nagios/etc/objects/contacts.cfg
+
+[configure the web interface]
+#make install-webconf
+
+[create a nagiosadmin account for login into the nagios web interface set password as well]
+#htpasswd -c /usr/local/nagios/etc.htpasswd.users nagiosadmin
+
+#service httpd restart
+
+[complie & install the nagios plugin]
+#cd ~/downloads
+#tar zxvf nagios-plugin-2.0.3.tar.gz
+#cd nagios-plugin-2.0.3
+
+[compile & install the plugins]
+#./configure --with-nagios-user=nagios
+#./configure --with-nagios-groups=nagios
+
+
+#make
+#make install
+
+[start nagios. add nagios to list of system services & have it automatically start when the system boots]
+#chkconfig --add nagios
+#chkconfig nagios on
+[verify the sample nagios configuartion files]
+#/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+
+[if there is no errors, start nagios]
+#service nagios start
+#service httpd restart
+
+--------------------------------
