@@ -1,0 +1,49 @@
+
+
+
+
+terraform init
+terraform validate
+terraform plan
+terraform apply --auto-approve
+terraform destroy --auto-approve    
+				--target = aws_instance.<name>  {destroy specific resource}
+
+---------------------------------------------------
+terraform fmt 	{to check proper indentation of terrafrom file}
+-----------------------------------------------------------
+terraform taint <ec2 instance name>   {recrteate specific resource}
+terraform untaint <ec2 instance name>
+--------------------------------------------------------
+terraform graph
+----------------------------------------------------------
+terraform state list 	{show terraform.tfstate}
+terraform state show
+
+cat terraform.tfstate    {show info of infra created}
+cat terraform.tfstate.backup  {show info of infra destroyed}
+-----------------------------------------------------------
+terraform workspace new <name>
+terraform workspace list 
+terraform workspace show
+terraform workspace select <name>
+		{to create infra in workspace
+			[locals {
+			  env = "${terraform.workspace}"
+			  }
+			]
+		
+terraform workspace delete <name>
+-----------------------------------------------------------
+
+
+varible.tf
+	variable "instance_count" {
+	}
+	variable "ami_id" {
+	}
+	variable "instance_type" {
+	}
+	variable "instance_name" { 
+	}
+-------------------------------------------------------
