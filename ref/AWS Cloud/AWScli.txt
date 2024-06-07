@@ -1,6 +1,48 @@
 
 
-aws 
--------------------------
 
-aws ec2 
+aws configure
+vim .aws/configure
+
+
+aws [options] <command> <subcommand> [parameters]
+
+-------------------------EC2
+
+$ aws ec2 describe-instances
+
+$ aws ec2 start-instances --instance-ids i-1348636c
+
+$ aws sns publish --topic-arn arn:aws:sns:us-east-1:546419318123:OperationsError --message "Script Failure"
+
+$ aws sqs receive-message --queue-url https://queue.amazonaws.com/546419318123/Test
+
+--------------------------------------S3
+
+$ aws s3 ls s3://mybucket
+
+$ aws s3 cp myfolder s3://mybucket/myfolder --recursive
+aws s3 mb s3://mybuket
+aws s3 rb s3://mybuket
+
+$ aws s3 sync myfolder s3://mybucket/myfolder --exclude *.tmp
+
+aws s3api delete-objects
+
+----------------------------------------IAM
+
+aws iam list-access-keys \
+    --user-name Bob
+
+aws iam list-attached-user-policies \
+    --user-name Bob
+
+aws iam list-groups
+
+aws iam list-attached-group-policies \
+    --group-name Admins
+
+aws iam list-roles
+
+aws iam list-attached-role-policies \
+    --role-name SecurityAuditRole

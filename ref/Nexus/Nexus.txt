@@ -1,0 +1,8 @@
+
+min req t2.medium
+nexus uses java
+PORT: 8081
+--------------------------
+
+
+

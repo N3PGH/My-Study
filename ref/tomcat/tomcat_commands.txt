@@ -1,6 +1,11 @@
 
 
 
+
+
+
+
+
 #wget https://d1cdn.apache.org/tomcat/tomcat-8/v8.5.98/bin/apache-tomcat-8.5.98.tar.gz
 #tar -xzvf apache-tomcat-8.5.98.tar.gz -C /opt/
 #mv /opt/apache-tomcat-8.5.98 /opt/tomcat
@@ -53,5 +58,38 @@ $sudo system enable tomcat
 	#journalctl -u tomcat.service -f
 #systemctl status tomcat.service 
 
--------------------------
+--------------------------------------
+
+CONFIGURE USER, PASSWORD & ROLES
+vim apache-tomcat-9.0.83/conf/tomcat-users.xml
+
+ 56   <role rolename="manager-gui"/>
+ 57   <role rolename="manager-script"/>
+ 58   <user username="tomcat" password="raham123" roles="manager-gui, manager-script"/>
+----------------------------------
+DELETE LINE 21 AND 22
+vim apache-tomcat-9.0.83/webapps/manager/META-INF/context.xml
+----------------------------------
+ STARTING TOMCAT
+sh apache-tomcat-9.0.83/bin/startup.sh
+-----------------------------------------
+
+REAL SCENARIOS:
+port change:
+vim /root/apache-tomcat-9.0.80/conf/server.xml (line 69)
+sh /root/apache-tomcat-9.0.80/bin/shutdown.sh
+sh /root/apache-tomcat-9.0.80/bin/startup.sh
+
+passowrd:
+vim apache-tomcat-9.0.80/conf/tomcat-users.xml
+sh /root/apache-tomcat-9.0.80/bin/shutdown.sh
+sh /root/apache-tomcat-9.0.80/bin/startup.sh
+-------------------------------------
+
+
+
+
+
+
+
 

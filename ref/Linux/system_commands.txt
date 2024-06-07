@@ -1,59 +1,22 @@
 _____________________________________________________
-
+************[HOST]**************
 sudo vi etc/host
 sudo hostnamectl set-hostname <hostname>
-sudo -i {
+sudo -i 
 
-visudo
-chkconfig httpd on 
-
---------------------------------
-chmod 777 filename
-sh filename
-./filename
--------------------------------------
 hostname = display Machine Details
        -i = display IP address
 ifconfig =
 
 cat /etc/os-release
 
----------------------------------
-free -m {=phisical memory}
-        -g
-vmstat -t {=memory status}
-             -a
------------------------------------
-sar -u  2 6 {=cpu utilization every 2sec for 6times}
-      -v 1 3  
-
-ps -ef | grep <serivcename>
-kill -9 <processid>
-
-
------------------------------------------
-
-Df -h {EBS storage info}
-du -sh {display space occupied by OS}
-
-lsblk {disk info}
-
--------------------------------
-Root Volume location: /dev/xvda
-
--------------------------------------------------------------------
-/home = home directory for user
-/root = home directory for rootuser
-/boot = directory for linux boot file
-/etc = directory for configuration files
-/usr = directory for default installed pkg
-/bin = directory for commands used by user
-/sbin = directory for commands used by rootuser only
-/opt = directory for optional pkg
-/dev = directory for essential device files; terminal devies,usb, other attached device
-______________________________________________________________
-
-
+----------------------
+**************[USERS]**********************
+passwd root  -- > to login to other servers
+vim /etc/ssh/sshd_config (38 & 61 uncommnet both lines) 
+systemctl restart sshd
+systemctl status sshd
+hostname -i
 ---------------------------------------------------------------
 useradd <username>
 groupadd <groupname>
@@ -73,7 +36,74 @@ gpasswd -m <username1,username2,username3> <groupname>
 
 su <username>  {login to username}
 ctrl d {logout from current user}
+----------------------------------------------------------
+
+----------------------------------------------------------
+*************[INSTALLATION]*****************
+vim .bashrc  {export path for new installation service}
+
+
+---------------
+**************[SYSTEM]************************
+visudo  {edits the sudoers file}
+visudo /etc/sudoers
+
+
+
+chkconfig httpd on 
+
+vi /etc/systemd/system/tomcat.service
+vi /usr/lib/systemd/system/jenkins.service
+
+--------------------------------
+************[FILE EXCECUTION]*************
+chmod 777 filename
+sh filename
+./filename
+
+-------------------------------------
+
+
+---------------------------------
+***********[SYSTEM RESOURCE]*************
+free -m {=phisical memory}
+        -g
+vmstat -t {=memory status}
+             -a
+-----------------------------------
+sar -u  2 6 {=cpu utilization every 2sec for 6times}
+      -v 1 3  
+
+ps -ef | grep <serivcename>
+kill -9 <processid>
+
+
 ------------------------------------------------------------
+**************[STORAGE]*******************
+Df -h {EBS storage info}
+du -sh {display space occupied by OS}
+
+lsblk {disk info}
+
+-------------------------------
+Root Volume location: /dev/xvda
+
+--------------------------------------------------------------
+/home = home directory for user
+/root = home directory for rootuser
+/boot = directory for linux boot file
+/etc = directory for configuration files
+/usr = directory for default installed pkg
+/bin = directory for commands used by user
+/sbin = directory for commands used by rootuser only
+/opt = directory for optional pkg
+/dev = directory for essential device files; terminal devies,usb, other attached device
+______________________________________________________________
+
+
+
+*******************[NETWORK]*******************
+
 #yum install net-tools -y
 netstat -ab
 	-a
@@ -84,7 +114,13 @@ netstat -ab
 netstat -tulpn | grep 8080  {to see tomcat listening}
 
 ----------------------------------------------------------
-nslookup <hostname>
+nslookup <hostname>     
 -------------------------------------------
 Website path:  /var/www/html
 Webapp path:  /tomcat/webapps
+
+
+---------------------------------------------
+
+JRE-
+JDK-

@@ -4,5 +4,13 @@
 
 #mvn --version
 #mvn clean  {to clean maven it removes target folder}
-#mvn clean package  {to build package it will create .war file}
+#mvn clean package  {to build package it will create .war file}{to perform end to end}
 --or #mvn package -DskipTests {it will skip test stage & create .war file}
+
+mvn compile 
+mvn test  {used to unit-test the code}
+
+mvn package  {used to create artifact on project dir}
+mvn install  {used to create artifact on project dir & maven home}
+ls /root/.m2/repository/in
+

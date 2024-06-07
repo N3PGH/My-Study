@@ -1,0 +1,141 @@
+
+
+WORKSPACE: where your job output is going to be stored
+Default: /var/lib/jenkins/workspace
+
+
+CUSTOM WORKSPACE: storing the jobs output on our own folders
+cd 
+mkdir raham
+cd /
+chown jenkins:jenkins /root
+chown jenkins:jenkins /root/dev1
+-----------------------------------
+
+
+1. USER DEFINED VARIABLES: these are defined by user
+a. Local Variable: Variable will work inside of job.
+b. Global Variable: Variable will work outside of job.
+
+2. JENKINS ENV VARIABLES: these are defined by Jenkins itself.
+a. these variables can be change from build to build.
+b. these variables will be on upper case.
+c. these variables can be defined only once.
+
+echo "the build number is $BUILD_NUMBER, the job name is $JOB_NAME"
+
+printenv: gives all env vars of jenkins
+
+find / -name jenkins.service
+find command used to find the path of a file.
+-------------------------------------------------------
+
+ADMIN TASKS:
+1. CHANGING PORT NUMBER OF JENKINS:
+
+vim /usr/lib/systemd/system/jenkins.service
+line-67: 8080=8090 -- > save and exit
+systemctl daemon-reload
+systemctl restart jenkins.service
+
+When we chnage the configuration of any service we need to restart it.
+
+2. PASSWORDLESS LOGIN:
+Its not encouraged in real time.
+
+find / -name config.xml
+vim /var/lib/jenkins/config.xml (true=false)
+systemctl restart jenkins.service
+
+3. BUILD EXECUTORS:
+by default, Jenkins will execute jobs in sequential processes (one by one)
+but if we want to run parallel jobs we can use concurrent builds
+job -- > configure -- > Execute concurrent builds if necessary -- > save
+
+to increase build executors:
+dashboard -- > Build Executor Status -- > Built-In Node -- > configure -- > Number of executors: 10 -- > save
+
+build for 1o times -- > server will be crashed due to heavy load 
+Reslove: stop the server for few mins and start it
+when we stop server 
+1. public-ip will chnage
+2. services will be also stopped 
+so now restart jenkins service.
+-------------------------------------------
+
+CRON JOB:create a ci job -- > Build Triggers -- > Build periodically -- > * * * * * -- > save
+
+POLL SCM: create a ci job -- > Build Triggers -- > poll scm -- > * * * * * -- > save
+
+WEBHOOK:create ci job -- > Build Triggers: GitHub hook trigger for GITScm polling -- > save
+	repo -- > settings -- > webhooks -- > add webhook -- > Payload URL (jenkins url) -- > http://35.180.46.134:8080/github-webhook/  -- > Content type -- > application/json -- > add
+
+THROTTLE BUILD:create a ci job -- > configure -- > Throttle builds -- > Number of builds: 2 -- > time period : hours -- > save
+	Execute concurrent builds if necessary -- > tick it
+------------------------------------------------------------
+
+
+STEP-2: SETUP THE SLAVE SERVER
+Dashboard -- > Manage Jenkins -- > Nodes & Clouds -- > New node -- > nodename: abc -- > permanaent agent -- > save 
+
+CONFIGURATION OF SALVE:
+
+Number of executors : 3 #Number of Parallel builds
+Remote root directory : /tmp #The place where our output is stored on slave sever.
+Labels : swiggy #place the op in a particular slave
+useage: last option
+Launch method : last option 
+Host: (your privte ip)
+Credentials -- > add -- >jenkins -- > Kind : ssh username with privatekey -- > username: ec2-user 
+privatekey : pemfile of server -- > save -- > 
+Host Key Verification Strategy: last option
+
+
+DASHBOARD -- > JOB -- > CONFIGURE -- > RESTRTICT WHERE THIS JOB RUN -- > LABEL: SLAVE1 -- > SAVE
+
+
+PLUGIN -- >DEPLOY TO CONTAINER PLUGIN
+
+
+-------------------------------------------
+
+RESTORE JOBS:IF WE DELETE JOBS WE CAN RESTORE JOBS WITH Job Configuration History Plugin
+
+
+RBAC: ROLE BASE ACCESS CONTROL.
+TO restrict the user PERMISSIONS in jenkins.
+
+STEP-1: USER CREATION
+manage jenkins -- > users -- > create users -- > suresh: fresher 
+
+STEP-2: PLUGIN -- > Role-based Authorization Strategy 
+
+STEP-3: CONFIGURE THE PLUGIN
+Dashboard
+Manage Jenkins
+Security
+Authorization 
+Role-based  Strategy  
+SAVE
+
+STEP-4: MANAGE AND ASSIGN USERS
+manage roles -- > add -- > fresher & exp -- > fresher: overall read & exp: admin -- > save
+assign roles -- > add user -- > rajesh: fresher & ravi: exp -- > save
+
+
+-------------------------------------------------------------
+LINKED JOBS:
+ONE JOB IS INKED WITH ANOTHER JOB
+
+CREATE 2 FREE STYLE JOBS.
+JOB-1 -- > CONFIGURE -- > POST BUILD -- > BUILD OTHER PROJECTS -- > TWO -- > SAVE AND BUILD
+
+
+-----------------------------------------------
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+
+
+CREATE 5 SERVERS [1=ANSIBLE, 2=DEV, 2=TEST]
+ALL SERVERS:
+sudo -i
+hostnamectl set-hostname ansible/dev-1/dev-2/test-1/test-2
+sudo -i
+
+passwd root  -- > to login to other servers
+vim /etc/ssh/sshd_config (38 & 61 uncommnet both lines) 
+systemctl restart sshd
+systemctl status sshd
+hostname -i
+
+ ANSIBLE SERVER:
+
+amazon-linux-extras install ansible2 -y
+yum install python3 python-pip python-dlevel -y
+
+vim /etc/ansible/hosts
+# Ex 1: Ungrouped hosts, specify before any group headers.
+[dev]
+172.31.20.40
+172.31.21.25
+[test]
+172.31.31.77
+172.31.22.114
+
+ssh-keygen -- > enter 4 times 
+ssh-copy-id root@private ip of dev-1 -- > yes -- > password -- > ssh private ip -- > ctrl d
+ssh-copy-id root@private ip of dev-2 -- > yes -- > password -- > ssh private ip -- > ctrl d
+ssh-copy-id root@private ip of test-1 -- > yes -- > password -- > ssh private ip -- > ctrl d
+ssh-copy-id root@private ip of test-2 -- > yes -- > password -- > ssh private ip -- > ctrl d
+
+ansible -m ping all : To check worker node connection with ansible server.
+---------------------------------------------------------------
+
+
+

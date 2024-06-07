@@ -1,0 +1,51 @@
+ 
+ [Docker installation]
+apt install docker.io -y
+docker --version
+systemctl start docker
+systemctl enable docker
+
+
+----------------------------------
+ [K8s Installation for EKS]
+sudo curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+sudo chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin
+
+
+kubectl version --short --client
+kubectl version --client --output=yaml
+
+sudo apt-get update
+
+-------------------------------------------------------
+ [Minikube installation]
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+	-------OR
+sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+sudo chmod +x /usr/local/bin/minikube
+sudo minikube version
+	-------
+minikube start
+minikube kubectl -- get po
+minikube dashboard
+minikube pause
+minikube unpause
+minikube stop
+minikube delete --all
+minikube config set memory 9001
+minikube addons list
+----------------------------------------------
+
+[kops]
+
+vim .bashrc
+	#export PATH=$PATH:/usr/local/bin/
+
+
+
+
+kubectl get no  {get all node info}
+
+
