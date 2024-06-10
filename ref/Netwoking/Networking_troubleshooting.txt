@@ -2,6 +2,8 @@
 
 
 
+-------------------------------------
+#yum install net-tools -y
 netstat -ab
 	-a
 	-o
@@ -9,6 +11,32 @@ netstat -ab
 	-e
 	-n
 netstat -tulpn | grep 8080  {to see tomcat listening}
------------------------------------------
-nslookup <hostname>
--------------------------------------
+
+----------------------------------------------------------
+nslookup <hostname>     
+curl hostname:3000
+
+.port configure
+
+*****Local DNS Mapping****
+
+/etc/hosts 	{mapping local DNS on local m/c}   
+/etc/systemd/resovled.conf.d/dns_servers.conf   
+-----------------------------
+[On Gateway server]
+{create config file for ssh automayion in .ssh directory}
+
+vi .ssh/config
+
+	HOST <hostname>
+	IdentityFile ~/.ssh/key.pem
+	user ubuntu
+	Hostname <host ip>
+----------------------------------------------
+-------------------------------------------
+Website path:  /var/www/html
+Webapp path:  /tomcat/webapps
+
+----------------------------------------
+
+

@@ -4,14 +4,19 @@
 apt install nginx
 
 cd /etc/nginx/conf.d/
-vi <hostname>.conf
+vi <hostipname>.conf
+
+mkdir -p /var/log/nginx/<hostipname>/
+
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/<hostname>.conf
+vi /etc/nginx/sites-available/<hostname>.conf
+nano /etc/nginx/sites-available/<hostname>.conf
+
+nginx -t   {check conf file syntax}
 
 
-cp /etc/nginx/sites-available/default /etc/nginx/sites-available/ui.conf
-vi /etc/nginx/sites-available/ui.conf
-nano /etc/nginx/sites-available/ui.conf
 
-ln -s /etc/nginx/sites-available/ui.conf
+ln -s /etc/nginx/sites-available/<hostname>.conf
 ls /etc/nginx/sites-enabled/
 
 systemctl restart nginx.service

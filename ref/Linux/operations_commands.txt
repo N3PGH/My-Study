@@ -33,7 +33,7 @@ ctr+L = clear screen
 
 [ec2-user]$sudo su = gain superuser privilage
 
-[ec2-user]#mkdir dr1 = make directory dr1
+[ec2-user]#mkdir -p dr1 = make directory dr1
 [ec2-user]#mkdir dr1/dr2/dr3
 
 [/dr2]#cd ../../ = change directory backward 2 steps

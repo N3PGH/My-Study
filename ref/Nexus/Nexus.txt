@@ -1,7 +1,10 @@
 
 min req t2.medium
+min 1vcpu 2gb ram
 nexus uses java
 PORT: 8081
+
+
 --------------------------
 
 

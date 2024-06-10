@@ -1,0 +1,30 @@
+
+
+
+
+
+
+
+-------------------------------------
+4:{provide ssh public key to user}
+
+su - <username>
+mkdir ~/.ssh
+vi ~/.ssh/authorized_keys
+chmod 0700 ~/.ssh
+chmod 0400 ~/.ssh/authorized_keys
+
+-----------------------------------
+[On Gateway server]
+5:{create config file for ssh automayion in .ssh directory}
+
+vi .ssh/config
+
+	HOST <hostname>
+	IdentityFile ~/.ssh/key.pem
+	user ubuntu
+	Hostname <host ip>
+---------------------------------------
+
+
+6: {

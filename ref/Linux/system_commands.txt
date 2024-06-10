@@ -1,7 +1,13 @@
 _____________________________________________________
-************[HOST]**************
-sudo vi etc/host
+************[HOST CONNECTIONS]**************
+sudo vi etc/hosts
 sudo hostnamectl set-hostname <hostname>
+
+cd .ssh/
+vi key.pem  {copy db-server pem key}
+chmod 0400 key.pem
+ssh -i key.pem ubuntu@10.1.1.42  (private ip of db-server)
+
 sudo -i 
 
 hostname = display Machine Details
@@ -14,9 +20,29 @@ cat /etc/os-release
 **************[USERS]**********************
 passwd root  -- > to login to other servers
 vim /etc/ssh/sshd_config (38 & 61 uncommnet both lines) 
+
 systemctl restart sshd
 systemctl status sshd
 hostname -i
+
+visudo  {edits the sudoers file}
+visudo /etc/sudoers
+
+chmod u-w /etc/sudoers
+visudo -c  {check syntax}
+systemxtl reload sshd  {reload ssh service}
+-----
+{provide ssh public key to user}
+su - <username>
+mkdir ~/.ssh
+vi ~/.ssh/authorized_keys
+chmod 0700 ~/.ssh
+chmod 0400 ~/.ssh/authorized_keys
+
+
+
+
+
 ---------------------------------------------------------------
 useradd <username>
 groupadd <groupname>
@@ -42,15 +68,14 @@ ctrl d {logout from current user}
 *************[INSTALLATION]*****************
 vim .bashrc  {export path for new installation service}
 
+cp /etc/skel/.bashrc ~
+cp /etc/skel/.profile ~
 
 ---------------
 **************[SYSTEM]************************
-visudo  {edits the sudoers file}
-visudo /etc/sudoers
 
 
-
-chkconfig httpd on 
+chkconfig httpd on {to start httpd at start by default}
 
 vi /etc/systemd/system/tomcat.service
 vi /usr/lib/systemd/system/jenkins.service
@@ -115,6 +140,15 @@ netstat -tulpn | grep 8080  {to see tomcat listening}
 
 ----------------------------------------------------------
 nslookup <hostname>     
+curl hostname:3000
+
+.port configure
+
+*****Local DNS Mapping****
+
+/etc/hosts 	{mapping local DNS on local m/c}   
+/etc/systemd/resovled.conf.d/dns_servers.conf   
+
 -------------------------------------------
 Website path:  /var/www/html
 Webapp path:  /tomcat/webapps

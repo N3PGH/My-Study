@@ -1,0 +1,13 @@
+
+
+*********************
+su jenkins
+
+cp /etc/skel/.bashrc ~
+cp /etc/skel/.profile ~
+apt update 
+
+
+---------------------
+
+/var/lib/jenkins/workspace/

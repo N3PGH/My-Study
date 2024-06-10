@@ -1,0 +1,13 @@
+Node Version Manager
+
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+
+source ~/.bashrc
+
+
+nvm
+nvm ls-remote
+nvm install <version>
+
+
+
